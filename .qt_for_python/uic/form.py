@@ -39,6 +39,8 @@ class Ui_MainWindow(object):
         self.actionGo.setObjectName(u"actionGo")
         self.actionStart = QAction(MainWindow)
         self.actionStart.setObjectName(u"actionStart")
+        self.actionURL = QAction(MainWindow)
+        self.actionURL.setObjectName(u"actionURL")
         self.centralwidget = QWidget(MainWindow)
         self.centralwidget.setObjectName(u"centralwidget")
         self.gridLayout_2 = QGridLayout(self.centralwidget)
@@ -360,6 +362,7 @@ class Ui_MainWindow(object):
         self.metroComboboxSignature.addItem("")
         self.metroComboboxSignature.addItem("")
         self.metroComboboxSignature.addItem("")
+        self.metroComboboxSignature.addItem("")
         self.metroComboboxSignature.setObjectName(u"metroComboboxSignature")
         self.metroComboboxSignature.setCursor(QCursor(Qt.PointingHandCursor))
         self.metroComboboxSignature.setFocusPolicy(Qt.NoFocus)
@@ -403,11 +406,28 @@ class Ui_MainWindow(object):
         self.gridLayout_3.setObjectName(u"gridLayout_3")
         self.gridLayout_6 = QGridLayout()
         self.gridLayout_6.setObjectName(u"gridLayout_6")
+        self.verticalSpacer_3 = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
+
+        self.gridLayout_6.addItem(self.verticalSpacer_3, 3, 0, 1, 1)
+
+        self.verticalSpacer_2 = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
+
+        self.gridLayout_6.addItem(self.verticalSpacer_2, 0, 0, 1, 1)
+
         self.aboutLabelTitle = QLabel(self.tabAbout)
         self.aboutLabelTitle.setObjectName(u"aboutLabelTitle")
+        sizePolicy1.setHeightForWidth(self.aboutLabelTitle.sizePolicy().hasHeightForWidth())
+        self.aboutLabelTitle.setSizePolicy(sizePolicy1)
         self.aboutLabelTitle.setAlignment(Qt.AlignCenter)
 
-        self.gridLayout_6.addWidget(self.aboutLabelTitle, 0, 0, 1, 1)
+        self.gridLayout_6.addWidget(self.aboutLabelTitle, 1, 0, 1, 1)
+
+        self.aboutButtonURL = QPushButton(self.tabAbout)
+        self.aboutButtonURL.setObjectName(u"aboutButtonURL")
+        self.aboutButtonURL.setCursor(QCursor(Qt.PointingHandCursor))
+        self.aboutButtonURL.setFocusPolicy(Qt.NoFocus)
+
+        self.gridLayout_6.addWidget(self.aboutButtonURL, 2, 0, 1, 1)
 
 
         self.gridLayout_3.addLayout(self.gridLayout_6, 0, 0, 1, 1)
@@ -457,6 +477,7 @@ class Ui_MainWindow(object):
         self.menuMenu.addAction(self.menuBPM_Calculator.menuAction())
         self.menuMenu.addAction(self.menuBPM_Metronome.menuAction())
         self.menuMenu.addSeparator()
+        self.menuMenu.addAction(self.actionURL)
         self.menuMenu.addAction(self.actionExit)
         self.menuBPM_Tap.addAction(self.actionTapT)
         self.menuBPM_Tap.addAction(self.actionTapZ)
@@ -468,7 +489,7 @@ class Ui_MainWindow(object):
         self.retranslateUi(MainWindow)
 
         self.tabWidget.setCurrentIndex(0)
-        self.metroComboboxSignature.setCurrentIndex(1)
+        self.metroComboboxSignature.setCurrentIndex(2)
 
 
         QMetaObject.connectSlotsByName(MainWindow)
@@ -504,8 +525,12 @@ class Ui_MainWindow(object):
 #if QT_CONFIG(shortcut)
         self.actionStart.setShortcut(QCoreApplication.translate("MainWindow", u"P", None))
 #endif // QT_CONFIG(shortcut)
+        self.actionURL.setText(QCoreApplication.translate("MainWindow", u"GitHub Repo", None))
+#if QT_CONFIG(shortcut)
+        self.actionURL.setShortcut(QCoreApplication.translate("MainWindow", u"F1", None))
+#endif // QT_CONFIG(shortcut)
         self.tapButtonReset.setText(QCoreApplication.translate("MainWindow", u"Reset [R]", None))
-        self.tapLabelAmount.setText(QCoreApplication.translate("MainWindow", u"# taps:", None))
+        self.tapLabelAmount.setText(QCoreApplication.translate("MainWindow", u"# Taps:", None))
         self.tapButtonTap.setText(QCoreApplication.translate("MainWindow", u"Tap [T, Z, X]", None))
         self.tapLabelDetails.setText(QCoreApplication.translate("MainWindow", u"Waiting for taps...", None))
         self.tapRadio2.setText(QCoreApplication.translate("MainWindow", u"1/2", None))
@@ -523,7 +548,7 @@ class Ui_MainWindow(object):
         self.calcComboboxValue.setItemText(1, QCoreApplication.translate("MainWindow", u"ms/tap", None))
         self.calcComboboxValue.setItemText(2, QCoreApplication.translate("MainWindow", u"taps/s", None))
 
-        self.calcLabelValue.setText(QCoreApplication.translate("MainWindow", u"Base Value", None))
+        self.calcLabelValue.setText(QCoreApplication.translate("MainWindow", u"Base Value:", None))
         self.calcButtonGo.setText(QCoreApplication.translate("MainWindow", u"Go", None))
         self.calcTextResult.setHtml(QCoreApplication.translate("MainWindow", u"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
@@ -537,22 +562,24 @@ class Ui_MainWindow(object):
         self.metroLabelRhythm.setText(QCoreApplication.translate("MainWindow", u"Tap Rhythm:", None))
         self.metroRadio4.setText(QCoreApplication.translate("MainWindow", u"1/4", None))
         self.metroButtonStart.setText(QCoreApplication.translate("MainWindow", u"Start / Stop [P]", None))
-        self.metroLabelFPS.setText(QCoreApplication.translate("MainWindow", u"0 ms/t, 0 tps", None))
+        self.metroLabelFPS.setText("")
         self.metroCheckboxSimulate.setText(QCoreApplication.translate("MainWindow", u"Simulate BPM Tap", None))
         self.metroLabelBPM.setText(QCoreApplication.translate("MainWindow", u"BPM:", None))
         self.metroLabelSignature.setText(QCoreApplication.translate("MainWindow", u"Time Signature:", None))
-        self.metroComboboxSignature.setItemText(0, QCoreApplication.translate("MainWindow", u"3/4", None))
-        self.metroComboboxSignature.setItemText(1, QCoreApplication.translate("MainWindow", u"4/4", None))
-        self.metroComboboxSignature.setItemText(2, QCoreApplication.translate("MainWindow", u"5/4", None))
-        self.metroComboboxSignature.setItemText(3, QCoreApplication.translate("MainWindow", u"6/4", None))
-        self.metroComboboxSignature.setItemText(4, QCoreApplication.translate("MainWindow", u"7/4", None))
-        self.metroComboboxSignature.setItemText(5, QCoreApplication.translate("MainWindow", u"8/4", None))
-        self.metroComboboxSignature.setItemText(6, QCoreApplication.translate("MainWindow", u"9/4", None))
+        self.metroComboboxSignature.setItemText(0, QCoreApplication.translate("MainWindow", u"2/4", None))
+        self.metroComboboxSignature.setItemText(1, QCoreApplication.translate("MainWindow", u"3/4", None))
+        self.metroComboboxSignature.setItemText(2, QCoreApplication.translate("MainWindow", u"4/4", None))
+        self.metroComboboxSignature.setItemText(3, QCoreApplication.translate("MainWindow", u"5/4", None))
+        self.metroComboboxSignature.setItemText(4, QCoreApplication.translate("MainWindow", u"6/4", None))
+        self.metroComboboxSignature.setItemText(5, QCoreApplication.translate("MainWindow", u"7/4", None))
+        self.metroComboboxSignature.setItemText(6, QCoreApplication.translate("MainWindow", u"8/4", None))
+        self.metroComboboxSignature.setItemText(7, QCoreApplication.translate("MainWindow", u"9/4", None))
 
         self.metroComboboxSignature.setCurrentText(QCoreApplication.translate("MainWindow", u"4/4", None))
         self.metroLabelVolume.setText(QCoreApplication.translate("MainWindow", u"Volume:", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tabMetro), QCoreApplication.translate("MainWindow", u"BPM Metronome", None))
         self.aboutLabelTitle.setText(QCoreApplication.translate("MainWindow", u"BPM Calculator by luxmiyu v1.0.727", None))
+        self.aboutButtonURL.setText(QCoreApplication.translate("MainWindow", u"Open GitHub Repository", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tabAbout), QCoreApplication.translate("MainWindow", u"About", None))
         self.menuMenu.setTitle(QCoreApplication.translate("MainWindow", u"Menu", None))
         self.menuBPM_Tap.setTitle(QCoreApplication.translate("MainWindow", u"BPM Tap", None))

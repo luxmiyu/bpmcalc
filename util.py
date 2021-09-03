@@ -1,7 +1,7 @@
 from PyQt5 import QtCore
 import time
 
-RATE = 120
+RATE = 288
 
 class Clock(QtCore.QThread):
     tick = QtCore.pyqtSignal()

@@ -14,8 +14,10 @@ executables = [
     Executable('bpmcalc.py', base=base)
 ]
 
-setup(name='template',
-      version = '1.0',
-      description = '',
-      options = {'build_exe': build_options},
-      executables = executables)
+setup(
+    name='template',
+    version = '1.0.727',
+    description = '',
+    options = {'build_exe': build_options},
+    executables = executables
+)

@@ -65,6 +65,11 @@ class Window(QtWidgets.QMainWindow):
         self.tock = QtMultimedia.QSoundEffect()
         self.tock.setSource(QtCore.QUrl("file:resources/snd/tock.wav"))
         self.tock.setVolume(self.metroSliderVolume.value() / 200)
+
+        # About
+
+        self.actionURL.triggered.connect(lambda: QtGui.QDesktopServices.openUrl(QtCore.QUrl("https://github.com/luxmiyu/bpmcalc")))
+        self.aboutButtonURL.clicked.connect(lambda: QtGui.QDesktopServices.openUrl(QtCore.QUrl("https://github.com/luxmiyu/bpmcalc")))
     
     # BPM Tap
     
@@ -104,8 +109,8 @@ class Window(QtWidgets.QMainWindow):
         self.tapLabelDetails.setText(
             str(self.tapTaps) + " taps, " +
             str("{:.2f}".format(bpm)) + " bpm, " +
-            str("{:.2f}".format(tapsPerSecond)) + " taps/second, " +
-            str("{:.2f}".format(secondsPerTap * 1000)) + " ms/tap")
+            str("{:.2f}".format(secondsPerTap * 1000)) + " ms/tap, " +
+            str("{:.2f}".format(tapsPerSecond)) + " taps/second")
     
     def tapReset(self):
         self.tapStart = 0
@@ -195,17 +200,11 @@ class Window(QtWidgets.QMainWindow):
             self.metroSig = int(1 / sig)
             self.metroBar = int(self.metroComboboxSignature.currentText()[0]) * self.metroSig
 
-            print(
-                "tap: " + str(self.metroTap) +
-                "\nsig: " + str(self.metroSig) +
-                "\nbar: " + str(self.metroBar)
-            )
-
             self.tick.play()
             self.metroProgressbar.setValue(0)
 
     def step(self, delta):
-        self.metroLabelFPS.setText("{:.2f}".format(delta * 1000) + " ms/t, " + "{:.2f}".format(1 / delta) + " tps")
+        #self.metroLabelFPS.setText("{:.2f}".format(delta * 1000) + " ms/t, " + "{:.2f}".format(1 / delta) + " tps")
 
         if self.metroIsPlaying and time.time() > self.metroNext:
             if self.metroCheckboxSimulate.isChecked(): self.tap()
