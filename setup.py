@@ -16,7 +16,7 @@ executables = [
 
 setup(
     name='bpmcalc',
-    version = '1.0.727',
+    version = '1.1.727',
     description = '',
     options = {'build_exe': build_options},
     executables = executables

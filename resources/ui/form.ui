@@ -746,7 +746,7 @@ p, li { white-space: pre-wrap; }
                </sizepolicy>
               </property>
               <property name="text">
-               <string>BPM Calculator by luxmiyu v1.0.727</string>
+               <string>BPM Calculator by luxmiyu v1.1.727</string>
               </property>
               <property name="alignment">
                <set>Qt::AlignCenter</set>

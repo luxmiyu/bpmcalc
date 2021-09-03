@@ -1,8 +1,6 @@
 import sys, time, qdarkgraystyle
 from PyQt5 import QtWidgets, QtGui, QtCore, uic, QtMultimedia
 
-from util import Clock
-
 class Window(QtWidgets.QMainWindow):
     timeStart = 0.0
 
@@ -15,6 +13,9 @@ class Window(QtWidgets.QMainWindow):
     metroTap = 0
     metroSig = 0 # how many tocks per tick
     metroBar = 0 # how many tocks per full bar
+
+    delta0 = time.perf_counter()
+    delta1 = time.perf_counter()
 
     def __init__(self):
         super(Window, self).__init__()
@@ -64,7 +65,11 @@ class Window(QtWidgets.QMainWindow):
         self.tick.setVolume(self.metroSliderVolume.value() / 100)
         self.tock = QtMultimedia.QSoundEffect()
         self.tock.setSource(QtCore.QUrl.fromLocalFile("./resources/snd/tock.wav"))
-        self.tock.setVolume(self.metroSliderVolume.value() / 200)
+        self.tock.setVolume(self.metroSliderVolume.value() / 200)        
+
+        self.timer = QtCore.QTimer()
+        self.timer.timeout.connect(self.step)
+        self.timer.start()
 
         # About
 
@@ -203,8 +208,12 @@ class Window(QtWidgets.QMainWindow):
             self.tick.play()
             self.metroProgressbar.setValue(0)
 
-    def step(self, delta):
-        #self.metroLabelFPS.setText("{:.2f}".format(delta * 1000) + " ms/t, " + "{:.2f}".format(1 / delta) + " tps")
+    def step(self):
+        self.delta1 = time.perf_counter()
+        delta = self.delta1 - self.delta0
+        self.delta0 = self.delta1
+
+        #if delta != 0: self.metroLabelFPS.setText("{:.2f}".format(delta * 1000) + " ms/t, " + "{:.2f}".format(1 / delta) + " tps")
 
         if self.metroIsPlaying and time.time() > self.metroNext:
             if self.metroCheckboxSimulate.isChecked(): self.tap()
@@ -221,7 +230,6 @@ class Window(QtWidgets.QMainWindow):
 
             self.metroProgressbar.setValue(int(self.metroTap / (self.metroBar - 1) * 1000))
 
-
 if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
 
@@ -231,9 +239,5 @@ if __name__ == "__main__":
     
     window = Window()
     window.show()
-
-    clock = Clock()
-    clock.tickDelta.connect(window.step)
-    clock.start()
 
     app.exec()

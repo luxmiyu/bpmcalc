@@ -578,7 +578,7 @@ class Ui_MainWindow(object):
         self.metroComboboxSignature.setCurrentText(QCoreApplication.translate("MainWindow", u"4/4", None))
         self.metroLabelVolume.setText(QCoreApplication.translate("MainWindow", u"Volume:", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tabMetro), QCoreApplication.translate("MainWindow", u"BPM Metronome", None))
-        self.aboutLabelTitle.setText(QCoreApplication.translate("MainWindow", u"BPM Calculator by luxmiyu v1.0.727", None))
+        self.aboutLabelTitle.setText(QCoreApplication.translate("MainWindow", u"BPM Calculator by luxmiyu v1.1.727", None))
         self.aboutButtonURL.setText(QCoreApplication.translate("MainWindow", u"Open GitHub Repository", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tabAbout), QCoreApplication.translate("MainWindow", u"About", None))
         self.menuMenu.setTitle(QCoreApplication.translate("MainWindow", u"Menu", None))
