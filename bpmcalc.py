@@ -60,10 +60,10 @@ class Window(QtWidgets.QMainWindow):
         ))
 
         self.tick = QtMultimedia.QSoundEffect()
-        self.tick.setSource(QtCore.QUrl("file:resources/snd/tick.wav"))
+        self.tick.setSource(QtCore.QUrl.fromLocalFile("resources/snd/tick.wav"))
         self.tick.setVolume(self.metroSliderVolume.value() / 100)
         self.tock = QtMultimedia.QSoundEffect()
-        self.tock.setSource(QtCore.QUrl("file:resources/snd/tock.wav"))
+        self.tock.setSource(QtCore.QUrl.fromLocalFile("resources/snd/tock.wav"))
         self.tock.setVolume(self.metroSliderVolume.value() / 200)
 
         # About
